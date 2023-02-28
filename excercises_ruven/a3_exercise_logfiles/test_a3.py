@@ -1,7 +1,7 @@
-
 import pytest
-from solution import logtolist, re_logtolist
+from a3_solution_reuven import logtolist, re_logtolist
 from io import StringIO
+
 
 @pytest.fixture
 def mini_mini_file():
@@ -17,31 +17,38 @@ def mini_mini_file():
 66.249.65.12 - - [30/Jan/2010:04:05:43 +0200] "GET /browse/one_node/1406 HTTP/1.1" 302 118 "-" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
 ''')
 
+
 def test_read_empty_file(mini_mini_file):
     log_list = logtolist(StringIO(''))
     assert len(log_list) == 0
     assert log_list == []
 
+
 def test_read_empty_line(mini_mini_file):
     log_list = logtolist(StringIO('\n'))
     assert len(log_list) == 1
+
 
 def test_read_logs(mini_mini_file):
     log_list = logtolist(mini_mini_file)
     assert len(log_list) == 10
 
+
 def test_got_a_list(mini_mini_file):
     log_list = logtolist(mini_mini_file)
     assert type(log_list) is list
+
 
 def test_all_are_dicts(mini_mini_file):
     log_list = logtolist(mini_mini_file)
     assert all([type(x) is dict
                 for x in log_list])
 
+
 def test_check_keys(mini_mini_file):
     log_list = logtolist(mini_mini_file)
     assert set(log_list[0].keys()) == {'ip_address', 'timestamp', 'request'}
+
 
 def test_check_values(mini_mini_file):
     log_list = logtolist(mini_mini_file)
@@ -50,6 +57,7 @@ def test_check_values(mini_mini_file):
     assert first_log_dict['ip_address'] == '67.218.116.165'
     assert first_log_dict['timestamp'] == '30/Jan/2010:00:03:18 +0200'
     assert first_log_dict['request'] == 'GET /robots.txt HTTP/1.0'
+
 
 # Below here are regexp tests, for the function re_logtolist
 # Don't feel obligated to implement this if regular expressions are hard for you!
@@ -60,9 +68,11 @@ def test_re_read_empty_file(mini_mini_file):
     assert len(log_list) == 0
     assert log_list == []
 
+
 def test_re_read_empty_line(mini_mini_file):
     log_list = re_logtolist(StringIO('\n'))
     assert len(log_list) == 1
+
 
 def test_re_read_bad_line(mini_mini_file):
     log_list = re_logtolist(StringIO('abc def ghi\n'))
@@ -73,22 +83,27 @@ def test_re_read_bad_line(mini_mini_file):
     assert first_log_dict['timestamp'] == 'No timestamp found'
     assert first_log_dict['request'] == 'No request found'
 
+
 def test_re_read_logs(mini_mini_file):
     log_list = re_logtolist(mini_mini_file)
     assert len(log_list) == 10
 
+
 def test_re_got_a_list(mini_mini_file):
     log_list = re_logtolist(mini_mini_file)
     assert type(log_list) is list
+
 
 def test_re_all_are_dicts(mini_mini_file):
     log_list = re_logtolist(mini_mini_file)
     assert all([type(x) is dict
                 for x in log_list])
 
+
 def test_re_check_keys(mini_mini_file):
     log_list = re_logtolist(mini_mini_file)
     assert set(log_list[0].keys()) == {'ip_address', 'timestamp', 'request'}
+
 
 def test_re_check_values(mini_mini_file):
     log_list = re_logtolist(mini_mini_file)
@@ -97,4 +112,3 @@ def test_re_check_values(mini_mini_file):
     assert first_log_dict['ip_address'] == '67.218.116.165'
     assert first_log_dict['timestamp'] == '30/Jan/2010:00:03:18 +0200'
     assert first_log_dict['request'] == 'GET /robots.txt HTTP/1.0'
-
