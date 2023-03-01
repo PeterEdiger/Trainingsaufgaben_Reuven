@@ -1,5 +1,5 @@
 import pytest
-from a3_solution_reuven import logtolist, re_logtolist
+from a3_peter_jun import logtolist, re_logtolist
 from io import StringIO
 
 
