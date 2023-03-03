@@ -1,4 +1,4 @@
-import solution
+import a4_peter_jun as solution
 import operator
 
 logfilename = 'mini-access-log.txt'

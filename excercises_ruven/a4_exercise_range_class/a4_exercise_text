@@ -108,7 +108,7 @@ def test_latest():
     assert sorted_ld[-1]['timestamp'] == latest['timestamp']
 
 def test_for_ip():
-    ld = solution.LogDicts(logfilename)
+    ld = solution.Log,Dicts(logfilename)
     matching_requests = ld.for_ip("65.55.106.183")
     assert len(matching_requests) == 2
     assert all([one_item['ip_address'] == '65.55.106.183'
