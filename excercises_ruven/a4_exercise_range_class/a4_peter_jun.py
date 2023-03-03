@@ -1,10 +1,6 @@
 from excercises_ruven.a3_exercise_logfiles.a3_peter_jun import logtolist
+import operator
 
-"""Ich brauche eine Klasse die bei einer Instanziierung" \
-die bereits gebaute Funktion benutzt um ein list of dicts zu benutzen.
-
-
-"""
 
 
 class LogDicts():
@@ -12,11 +8,9 @@ class LogDicts():
         file = open(filename)
         self.lst_of_dicts = logtolist(file)
 
-
-
     def dicts(self, key=None):
-        if key == "by_ip_address":
-            return sorted(self.lst_of_dicts, key=lambda i: i["ip_address"])
+        if key:
+            return sorted(self.lst_of_dicts, key=key)
 
         else:
             return self.lst_of_dicts
@@ -25,11 +19,12 @@ class LogDicts():
         return iter(self.lst_of_dicts)
 
 
+if __name__ == '__main__':
 
-inst = LogDicts("mini-access-log.txt")
+    inst = LogDicts("mini-access-log.txt")
 
-log_list_dicts = inst.dicts(key="by_ip_address")
-for item in log_list_dicts:
-    print(item)
+    log_list_dicts = inst.dicts(key=operator.itemgetter('ip_address'))
+    for item in log_list_dicts:
+        print(item)
 
 # returns an iterator of dicts, rather than the list all at once
