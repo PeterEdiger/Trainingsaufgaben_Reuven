@@ -1,7 +1,9 @@
 import a4_peter_jun as solution
 import operator
+from io import StringIO
 
 logfilename = 'mini-access-log.txt'
+logfilename_2 = 'micro-access-log.txt'
 
 
 def test_dicts_returns_list_of_dicts():
@@ -41,6 +43,10 @@ def test_sort_by_request():
     assert sorted_ld[0]['request'] <= sorted_ld[-1]['request']
     assert sorted_ld[-2]['request'] <= sorted_ld[-1]['request']
 
+def test_sort_by_timestamp():
+    ld = solution.LogDicts(logfilename_2)
+    assert ld.earliest()['request'][4]=="3"
+    assert ld.latest()['request'][4]=="1"
 
 def test_earliest():
     ld = solution.LogDicts(logfilename)
