@@ -4,7 +4,8 @@ Last week's exercise assumed that we had a file in the following format:
     67.218.116.165 - - [30/Jan/2010:00:03:18 +0200] "GET /robots.txt HTTP/1.0" 200 99 "-"
     "Mozilla/5.0 (Twiceler-0.9 http://www.cuil.com/twiceler/robot.html)"
 
-We then had to turn that file into a list of dictionaries, containing three pieces -- the IP address, the timestamp, and the query.
+We then had to turn that file into a list of dictionaries, containing three pieces -- the IP address,
+the timestamp, and the query.
 
 This week, we wanted to make it easier for people to work with these sorts of logfiles.
 The essential reading and import of the logfile would stay the same, but we wanted to be able to retrieve them in different ways.

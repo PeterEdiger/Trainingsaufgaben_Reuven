@@ -2,7 +2,11 @@ Back when the Web was young, the assumption was that people would browse through
 HTTP was seen as a way to transfer information from servers to browsers, which (obviously) existed in order for people to read things.
 
 Today, Web servers largely provide information not to humans, but rather to other programs.
-They provide this data in a variety of formats.  One of these formats is JSON ("JavaScript Object Notation").  Note that JSON is a format for text files.  It doesn't describe a data structure.  In order to actually use JSON data, you need to translate it from the JSON string into data structures in the language you're using -- such as Python.  Similarly, you can take data structures and turn them into JSON strings, in order for them to be manipulated in your language.
+They provide this data in a variety of formats.  One of these formats is JSON ("JavaScript Object Notation").
+Note that JSON is a format for text files.  It doesn't describe a data structure.
+In order to actually use JSON data, you need to translate it from the JSON string into data structures in the language you're using
+-- such as Python. Similarly, you can take data structures and turn them into JSON strings,
+in order for them to be manipulated in your language.
 
 JSON is cross-platform; it's a rare language nowadays that cannot translate its data structures to JSON, and vice versa.
 In Python, the "json" module provides us with this functionality.
@@ -33,7 +37,8 @@ which should have tabs as delimiters (rather than commas), should include the fo
     City population
     City size rank
 
-More specifically: You should write a function that takes a URL and a filename. It'll download the JSON information from the URL, and then write it to the file specified.
+More specifically: You should write a function that takes a URL and a filename.
+It'll download the JSON information from the URL, and then write it to the file specified.
 
 Questions or comments?  Discuss them in the forum!
 

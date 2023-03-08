@@ -7,7 +7,7 @@ def str_to_tmsp(d):
     return datetime.strptime(d["timestamp"], "%d/%b/%Y:%H:%M:%S %z")
 
 
-class LogDicts():
+class LogDicts:
     def __init__(self, filename):
         file = open(filename)
         self.lst_of_dicts = logtolist(file)
@@ -25,7 +25,7 @@ class LogDicts():
     def earliest(self):
         sorted_list = self.dicts(key=str_to_tmsp)
         return sorted_list[0]
-
+# Min Max benutzen bei earliest und latest.
     def latest(self):
         sorted_list = self.dicts(key=str_to_tmsp)
         return sorted_list[-1]
