@@ -43,10 +43,12 @@ def test_sort_by_request():
     assert sorted_ld[0]['request'] <= sorted_ld[-1]['request']
     assert sorted_ld[-2]['request'] <= sorted_ld[-1]['request']
 
+
 def test_sort_by_timestamp():
     ld = solution.LogDicts(logfilename_2)
-    assert ld.earliest()['request'][4]=="3"
-    assert ld.latest()['request'][4]=="1"
+    assert ld.earliest()['request'][4] == "3"
+    assert ld.latest()['request'][4] == "1"
+
 
 def test_earliest():
     ld = solution.LogDicts(logfilename)
