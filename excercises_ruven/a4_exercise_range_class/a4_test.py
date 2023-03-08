@@ -1,4 +1,4 @@
-import a4_peter_jun as solution
+import a4_peter_sen as solution
 import operator
 from io import StringIO
 
