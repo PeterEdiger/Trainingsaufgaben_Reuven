@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-import solution
+import a5_peter_jun as solution
 import csv
 
-filename = 'cities.csv'
+filename = 'filename'
 
 def test_writes_1000_cities():
-    solution.cities_to_csv(solution.gist_url, 'cities.csv')
+    solution.cities_to_csv(solution.gist_url, 'filename')
 
     for index, one_row in enumerate(csv.reader(open(filename))):
         pass
@@ -14,7 +14,7 @@ def test_writes_1000_cities():
     assert index == 999
 
 def test_each_city_has_four_fields():
-    solution.cities_to_csv(solution.gist_url, 'cities.csv')
+    solution.cities_to_csv(solution.gist_url, 'filename')
 
     all_lines_have_four = [len(fields) == 4
                            for fields in csv.reader(open(filename), delimiter='\t')]
@@ -22,7 +22,7 @@ def test_each_city_has_four_fields():
     assert all(all_lines_have_four)
 
 def test_first_is_new_york():
-    solution.cities_to_csv(solution.gist_url, 'cities.csv')
+    solution.cities_to_csv(solution.gist_url, 'filename')
 
     city, state, rank, population = open(filename).readline().strip().split('\t')
 
@@ -32,7 +32,7 @@ def test_first_is_new_york():
     assert population == '8405837'
 
 def test_last_is_panama_city():
-    solution.cities_to_csv(solution.gist_url, 'cities.csv')
+    solution.cities_to_csv(solution.gist_url, 'filename')
 
     for fields in csv.reader(open(filename), delimiter='\t'):
         pass
