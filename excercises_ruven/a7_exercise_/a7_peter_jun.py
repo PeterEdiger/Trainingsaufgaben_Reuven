@@ -31,7 +31,10 @@ def file_checker(dir_path: str, func) -> (dict, dict):
 
 
     """
-    ...
+    success_dict = {}
+    except_dict = {}
+    return success_dict, except_dict
+
 
 
 print(type(file_checker))
