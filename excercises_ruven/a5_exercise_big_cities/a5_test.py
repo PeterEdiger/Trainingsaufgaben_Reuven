@@ -5,6 +5,7 @@ import csv
 
 filename = 'filename'
 
+
 def test_writes_1000_cities():
     solution.cities_to_csv(solution.gist_url, 'filename')
 
@@ -13,13 +14,18 @@ def test_writes_1000_cities():
 
     assert index == 999
 
+
 def test_each_city_has_four_fields():
     solution.cities_to_csv(solution.gist_url, 'filename')
 
     all_lines_have_four = [len(fields) == 4
                            for fields in csv.reader(open(filename), delimiter='\t')]
+    bool_list = []
+    for fields in csv.reader(open(filename), delimiter='\t'):
+        bool_list.append(len(fields) == 4)
 
     assert all(all_lines_have_four)
+
 
 def test_first_is_new_york():
     solution.cities_to_csv(solution.gist_url, 'filename')
@@ -30,6 +36,7 @@ def test_first_is_new_york():
     assert state == 'New York'
     assert rank == '1'
     assert population == '8405837'
+
 
 def test_last_is_panama_city():
     solution.cities_to_csv(solution.gist_url, 'filename')

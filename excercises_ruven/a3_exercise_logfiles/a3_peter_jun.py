@@ -2,10 +2,16 @@ import re
 
 
 def logtolist(file):
+    """
+    takes a log file and returns a list of dicts containing logs
+    """
     return [line_to_dict(line) for line in file]
 
 
 def line_to_dict(line):
+    """
+    Takes a string filters and returns a dict with wanted key-value pairs-
+    """
     data_dict = {}
     search_ip_address = re.search(r"(\d*\.){3}\d*", line)
     ip_adress = search_ip_address.group() if search_ip_address else 'No IP address found'

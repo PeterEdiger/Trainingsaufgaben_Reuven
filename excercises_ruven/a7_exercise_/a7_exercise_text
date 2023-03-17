@@ -1,0 +1,52 @@
+This week, we'll write a function(We will call it A)
+that takes a function(We will call it B) as an argument.
+
+Actually, the function A takes two arguments:
+    A directory name (string)
+    the function B
+
+
+The function B will be applied to each file in the directory.
+
+
+The output from the function's B execution on each file will
+be returned by function A as part of a dictionary,
+in which the filenames are the keys and the results are the values.
+
+For example, if we call
+
+    import os
+
+    # This is function B
+    def file_length(filename):
+        return os.stat(filename).st_size
+
+    # This is function A
+    def filefunc(directory_name, func)
+        ...
+
+    # Call of function A
+    success_dict, failure_dict = filefunc('/etc/', file_length)
+
+
+The result will be two dictionaries:
+
+- The first dictionary's keys are the filenames and the output from running the function,
+when no exception was raised, and
+- The second dictionary's keys are the filenames
+and the exception object when one was raised.
+
+
+So in the above call, if no exceptions were raised,
+then the first dictionary returned would consist of the fienames in /etc/,
+with the length of each file as a value.  The second dictionary would be empty.
+
+I'm afraid that there isn't any test this week;
+I'm very much open to ideas on how to use pytest to check files in a directory.
+Let me know what you think!
+
+And in any event, you can discuss this assignment in the forums.
+
+I'll be back on Monday with a solution.
+
+Reuven
