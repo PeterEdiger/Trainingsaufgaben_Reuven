@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import solution
+import a6_peter_jun as solution
 import pytest
 from collections import Counter
 

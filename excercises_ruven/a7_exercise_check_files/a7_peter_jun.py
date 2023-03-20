@@ -32,7 +32,7 @@ def file_size(file_name:str, dir_path:str)->int:
 
 
 
-def file_checker(dir_path: str, func: Callable[[str],object])\
+def file_checker(dir_path: str, func: Callable[[str, str],object])\
         -> (Dict[str, object], Dict[str, object]):
 
     success_dict = {}

@@ -19,7 +19,8 @@ You’ll first want to create a list that looks like this.
 Note that we have a complex data structure here – a list of dicts,
 in which one of the dict’s values is a list.
 
-Given this data (or data like it), I’d like you to produce functions that produce a number of reports:
+Given this data (or data like it), I’d like you to produce functions
+that produce a number of reports:
 
 (1) Return the average age of all people,
  or (optionally) all people under a given age. In other words, you can call:
@@ -36,7 +37,9 @@ all_hobbies(people)
 will return a set of the strings, the hobbies listed for the people.
 
 (3) Return a Counter object indicating how many people have each hobby – that is,
-how many people are interested in Python, how many enjoy cooking, and so forth. (I know, in an ideal world, everyone would love Python. But hey, they’re my children, so I’ll forgive them. For now.) This would be the “hobby_counter” function.
+how many people are interested in Python, how many enjoy cooking, and so forth.
+(I know, in an ideal world, everyone would love Python.
+But hey, they’re my children, so I’ll forgive them. For now.) This would be the “hobby_counter” function.
 
 (4) Return the n most common hobbies, as a list of strings.
 This would be the “n_most_common” function, showing the n most common hobbies in the people. So this:
