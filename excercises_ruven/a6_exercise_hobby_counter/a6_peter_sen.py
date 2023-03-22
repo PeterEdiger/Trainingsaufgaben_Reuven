@@ -1,10 +1,11 @@
 import statistics as stat
 
 def average_age_under(people, under=1000):
+    ages = [human["age"] for human in people]
+    filtered_ages = filter(lambda a: a < under, ages)
     try:
-        ages = [human["age"] for human in people]
-        filtered_ages = filter(lambda a: a < under, ages)
         average_age = stat.mean(filtered_ages)
-        return average_age
-    except: return 0.0
+    except stat.StatisticsError:
+        return 0.0
+    return average_age
 
