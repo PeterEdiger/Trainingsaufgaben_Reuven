@@ -3,11 +3,11 @@ import operator
 from datetime import datetime
 
 
-def str_to_tmsp(d):
+def str_to_tmstp(d):
     return datetime.strptime(d["timestamp"], "%d/%b/%Y:%H:%M:%S %z")
 
 
-class LogDicts():
+class LogDicts:
     def __init__(self, filename):
         file = open(filename)
         self.lst_of_dicts = logtolist(file)
@@ -23,11 +23,11 @@ class LogDicts():
         return iter(self.dicts(key))
 
     def earliest(self):
-        sorted_list = self.dicts(key=str_to_tmsp)
+        sorted_list = self.dicts(key=str_to_tmstp)
         return sorted_list[0]
 
     def latest(self):
-        sorted_list = self.dicts(key=str_to_tmsp)
+        sorted_list = self.dicts(key=str_to_tmstp)
         return sorted_list[-1]
 
     def for_ip(self, ip_address, key=None):
@@ -36,13 +36,12 @@ class LogDicts():
     def for_request(self, text, key=None):
         return [d for d in self.dicts(key) if text in d["request"]]
 
-
-if __name__ == '__main__':
-
-    inst = LogDicts("mini-access-log.txt")
-
-    log_list_dicts = inst.dicts(key=None)
-    for item in log_list_dicts:
-        print(item)
+# if __name__ == '__main__':
+#
+#     inst = LogDicts("mini-access-log.txt")
+#
+#     log_list_dicts = inst.dicts(key=None)
+#     for item in log_list_dicts:
+#         print(item)
 
 # returns an iterator of dicts, rather than the list all at once
