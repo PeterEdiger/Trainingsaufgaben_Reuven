@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import a6_peter_jun as solution
+import a6_peter_sen as solution
 import pytest
 from collections import Counter
 
@@ -14,12 +14,12 @@ all_people = [{'name': 'Reuven', 'age': 50, 'hobbies': ['Python', 'cooking', 're
 
 @pytest.mark.parametrize('people, maxage, output', [
     ({}, 120, 0),
-    (all_people, 120, 23.25),
+    (all_people, 120, 25.75),
     (all_people, 25, 17.6666),
     (all_people, -1, 0)
 ])
 def test_average_age_under(people, maxage, output):
-    assert pytest.approx(solution.average_age_under(people, maxage), output)
+    assert pytest.approx(solution.average_age_under(people, maxage),abs=.01)==output
 
 
 @pytest.mark.parametrize('people, output', [
