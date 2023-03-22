@@ -25,7 +25,7 @@ class LogDicts:
     def earliest(self):
         sorted_list = self.dicts(key=str_to_tmstp)
         return sorted_list[0]
-
+# Min Max benutzen bei earliest und latest.
     def latest(self):
         sorted_list = self.dicts(key=str_to_tmstp)
         return sorted_list[-1]
