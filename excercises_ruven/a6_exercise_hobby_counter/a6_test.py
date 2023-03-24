@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import a6_peter_sen as solution
+import a6_peter_jun as solution
 import pytest
 from collections import Counter
 
@@ -19,13 +19,13 @@ all_people = [{'name': 'Reuven', 'age': 50, 'hobbies': ['Python', 'cooking', 're
     (all_people, -1, 0)
 ])
 def test_average_age_under(people, maxage, output):
-    assert pytest.approx(solution.average_age_under(people, maxage),abs=.01)==output
+    assert pytest.approx(solution.average_age_under(people, maxage), abs=.01) == output
 
 
 @pytest.mark.parametrize('people, output', [
     ({}, set()),
     (all_people, {'Python', 'reading', 'horses',
-     'art', 'piano', 'cooking', 'boxing'})
+                  'art', 'piano', 'cooking', 'boxing'})
 ])
 def test_all_hobbies(people, output):
     assert solution.all_hobbies(people) == output
@@ -34,7 +34,7 @@ def test_all_hobbies(people, output):
 @pytest.mark.parametrize('people, output', [
     ({}, Counter()),
     (all_people, Counter({'Python': 2, 'boxing': 1, 'cooking': 4,
-     'art': 1, 'horses': 1, 'piano': 1, 'reading': 3}))
+                          'art': 1, 'horses': 1, 'piano': 1, 'reading': 3}))
 ])
 def test_hobby_counter(people, output):
     assert solution.hobby_counter(people) == output

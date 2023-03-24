@@ -31,7 +31,8 @@ average_age_under(people, 20)
 
 and get the average age of those people under 20.
 
-(2) Return a set of the different hobbies enjoyed by people in our database. In other words:
+(2) Return a set of the different hobbies enjoyed by people in our database.
+In other words:
 all_hobbies(people)
 
 will return a set of the strings, the hobbies listed for the people.
@@ -42,7 +43,8 @@ how many people are interested in Python, how many enjoy cooking, and so forth.
 But hey, they’re my children, so I’ll forgive them. For now.) This would be the “hobby_counter” function.
 
 (4) Return the n most common hobbies, as a list of strings.
-This would be the “n_most_common” function, showing the n most common hobbies in the people. So this:
+This would be the “n_most_common” function, showing the n most common hobbies in the people.
+So this:
 n_most_common(people, 3)
 
 will return the names of the 3 most popular hobbies among our population.
