@@ -6,8 +6,7 @@ This script creates a folder and file structure used in the exercises.
 """
 
 
-def create_folder_name() -> (str, str):
-    task_name = "counter123"  # input("What is this weeks task name?: ")
+def create_folder_name(task_name) -> (str, str):
     all_folders = os.listdir()  # list of dirs
 
     folders = {}
@@ -24,21 +23,16 @@ def create_folder_name() -> (str, str):
 
 
 def create_dir_and_files():
-    new_folder_name, new_folder_n = create_folder_name()
+    new_folder_name, new_folder_n = create_folder_name("multizeperator")
     os.makedirs(new_folder_name)  # --> Creates a dir in cwd
-    excercise_text = open(f"{new_folder_name}/a{new_folder_n}_exercise_text", "w")
-    excercise_text.close()
-    peter_jun = open(f"{new_folder_name}/a{new_folder_n}_peter_jun.py", "w")
-    peter_jun.close()
-    peter_sen = open(f"{new_folder_name}/a{new_folder_n}_peter_sen.py", "w")
-    peter_sen.close()
-    test = open(f"{new_folder_name}/a{new_folder_n}_test.py", "w")
-    test.close()
-    with open(f"{new_folder_name}/a{new_folder_n}_solution_reuven.py", "w") as _f:
-        _f.write("# This is test comment \n")
-        _f.write("print('hello')")
-
-        ...
+    file_names = [
+        "exercise_text", "peter_jun.py",
+        "peter_sen.py", "test.py",
+        "solution_reuven.py",
+    ]
+    for _fl in file_names:
+        with open(f"{new_folder_name}/a{new_folder_n}_{_fl}", "w"):
+            ...
 
 
 if __name__ == '__main__':
