@@ -10,7 +10,7 @@ def create_folder_name(task_name) -> (str, str):
     all_folders = os.listdir()  # list of dirs
 
     folders = {}
-    for folder in all_folders:  # regex möglich
+    for folder in all_folders:
         folder_match = re.search(r"a(\d+)_exercise", folder)
         if folder_match:
             folders[folder] = int(folder_match.group(1))
@@ -23,7 +23,7 @@ def create_folder_name(task_name) -> (str, str):
 
 
 def create_dir_and_files():
-    new_folder_name, new_folder_n = create_folder_name("multizeperator")
+    new_folder_name, new_folder_n = create_folder_name("wedding_named_tuple")
     os.makedirs(new_folder_name)  # --> Creates a dir in cwd
     file_names = [
         "exercise_text", "peter_jun.py",
