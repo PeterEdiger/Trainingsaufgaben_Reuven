@@ -1,5 +1,6 @@
-from solution import GuestList, Person, TableFull
+from a9_peter_jun import GuestList, Person  # ,TableFull
 import pytest
+
 
 @pytest.fixture
 def some_people():
@@ -16,6 +17,7 @@ def some_people():
             Person('Joanna', 'Shaffer'),
             Person('Jonathon', 'Sheppard')]
 
+
 @pytest.fixture
 def populated_tables(some_people):
     gl = GuestList()
@@ -23,10 +25,12 @@ def populated_tables(some_people):
         gl.assign(one_person, table_number)
     return gl
 
+
 def test_empty_table():
     gl = GuestList()
     assert len(gl) == 0
     assert gl.free_space() == {}
+
 
 def test_with_a_few_people(some_people):
     gl = GuestList()
@@ -39,12 +43,14 @@ def test_with_a_few_people(some_people):
     assert len(gl) == 5
     assert len(gl.unassigned()) == 1
     assert gl.unassigned() == [some_people[0]]
-    for table_number in range(1,5):
+    for table_number in range(1, 5):
         assert gl.table(table_number) == [some_people[table_number]]
+
 
 def test_get_guests(some_people, populated_tables):
     gl = populated_tables
     assert gl.guests() == some_people
+
 
 def test_table_full(some_people):
     gl = GuestList()
@@ -54,14 +60,16 @@ def test_table_full(some_people):
     with pytest.raises(TableFull):
         gl.assign(some_people[GuestList.max_at_table], 1)
 
+
 def test_table_free_space(some_people):
     gl = GuestList()
-    for one_person in some_people[:GuestList.max_at_table-1]:
+    for one_person in some_people[:GuestList.max_at_table - 1]:
         gl.assign(one_person, 1)
-    assert(gl.free_space()) == {1:1}
+    assert (gl.free_space()) == {1: 1}
 
     gl.assign(one_person, 2)
-    assert(gl.free_space()) == {1:2, 2:GuestList.max_at_table-1}
+    assert (gl.free_space()) == {1: 2, 2: GuestList.max_at_table - 1}
+
 
 def test_repr(some_people):
     gl = GuestList()
