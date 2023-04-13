@@ -1,4 +1,4 @@
-from a9_peter_jun import GuestList, Person  # ,TableFull
+from a9_peter_jun import GuestList, Person  # , TableFull
 import pytest
 
 

@@ -43,6 +43,36 @@ class GuestList(dict):
     def assign(self, guest, table_number):
 
         self[guest] = table_number
+        already_on_table = Counter(self.values())
+        for table_count in already_on_table.values():
+            if table_count < 10:
+                continue
+            raise Exception 
+
+    def free_space(self):
+        table_numbers = []
+        for table_number in self.values():
+            table_numbers.append(table_number)
+        people_on_table = Counter(table_numbers)
+        left_seats = {}
+        for count_tuple in people_on_table.items():
+            left_seats[count_tuple[1]] = 10 - count_tuple[0]
+        return left_seats
+
+    def table(self, table_number):
+        persons = []
+
+        for person, tbl_nr in self.items():
+            if tbl_nr == table_number:
+                persons.append(person)
+        return persons
+
+    def unassigned(self):
+        persons = []
+        for person, tbl_nr in self.items():
+            if tbl_nr is None:
+                persons.append(person)
+        return persons
 
 
 gl = GuestList()
@@ -53,3 +83,6 @@ print(len(gl))
 gl.assign(Person('Stefan', 'Dalton'), 2)
 print(len(gl))
 
+gl.free_space()
+
+print(gl.table(2))
