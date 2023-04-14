@@ -76,7 +76,8 @@ then we should raise a TableFull exception.
 
 gl.free_space()
 
-The above should return a dictionary of table names (keys) and remaining space (values) for each table.
+The above should return a dictionary of table names (keys) and remaining space
+(values) for each table.
 
 (6) We should be able to say
 

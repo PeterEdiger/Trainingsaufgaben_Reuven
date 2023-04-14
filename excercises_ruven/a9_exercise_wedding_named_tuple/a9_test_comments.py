@@ -1,8 +1,9 @@
-from a9_peter_jun import GuestList, Person, TableFull
+from a9_peter_jun import GuestList, Person  # , TableFull
 import pytest
 
 
 @pytest.fixture
+# List of named tuples namedtuple("Person", "first_name, last_name")
 def some_people():
     return [Person('Waylon', 'Dalton'),
             Person('Justine', 'Henderson'),
@@ -19,7 +20,8 @@ def some_people():
 
 
 @pytest.fixture
-def populated_tables(some_people):
+# Populates the and adds table number
+def populated_tables(some_people) -> object:
     gl = GuestList()
     for table_number, one_person in enumerate(some_people):
         gl.assign(one_person, table_number)
@@ -34,6 +36,7 @@ def test_empty_table():
 
 def test_with_a_few_people(some_people):
     gl = GuestList()
+    # assigning None to table 0
     for table_number, one_person in enumerate(some_people[:5]):
         if table_number == 0:
             gl.assign(one_person, None)
@@ -41,16 +44,22 @@ def test_with_a_few_people(some_people):
             gl.assign(one_person, table_number)
 
     assert len(gl) == 5
+    # test if one table fits unassigned logic
     assert len(gl.unassigned()) == 1
+    # Which person is unnasigned
     assert gl.unassigned() == [some_people[0]]
     for table_number in range(1, 5):
+        # checks if method table returns the right people
         assert gl.table(table_number) == [some_people[table_number]]
 
 
 def test_get_guests(some_people, populated_tables):
+    # The tables get populated with my logic
     gl = populated_tables
-    assert gl.guests() == some_people
 
+# {Person(first_name='Waylon', last_name='Dalton'): 0, Person(first_name='Justine', last_name='Henderson'): 1, Person(first_name='Abdullah', last_name='Lang'): 2, Person(first_name='Marcus', last_name='Cruz'): 3, Person(first_name='Thalia', last_name='Cobb'): 4, Person(first_name='Mathias', last_name='Little'): 5, Person(first_name='Eddie', last_name='Randolph'): 6, Person(first_name='Angela', last_name='Walker'): 7, Person(first_name='Lia', last_name='Shelton'): 8, Person(first_name='Hadassah', last_name='Hartman'): 9, Person(first_name='Joanna', last_name='Shaffer'): 10, Person(first_name='Jonathon', last_name='Sheppard'): 11}
+
+    assert gl.guests() == some_people
 
 def test_table_full(some_people):
     gl = GuestList()
