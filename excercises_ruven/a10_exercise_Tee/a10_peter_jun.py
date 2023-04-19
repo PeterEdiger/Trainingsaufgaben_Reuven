@@ -2,8 +2,12 @@ class Tee:
     def __init__(self, *file_like_obj):
         self.files = file_like_obj
 
-    def __entry__(self):
-        ...
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+        return True
 
     def write(self, string):
         for file in self.files:
@@ -23,8 +27,9 @@ if __name__ == "__main__":
 
     file1 = open("file1", "w")
     file2 = open("file2", "w")
-    t1 = Tee(file1, file2, sys.stdout)
+    with Tee(file1, file2, sys.stdout) as t1:
+        t1.write("Hello" + "\n")
+        t1.writelines(["Hello", " World"])
 
-    t1.write("Hello" + "\n")
-    t1.writelines(["Hello", " World"])
-    t1.close()
+    with Tee(file1, file2, sys.stdout) as t2:
+        t2.write("Hello again")

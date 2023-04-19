@@ -40,6 +40,6 @@ class W:
 # with Tee(f1, f2) as t:
 #    t.write('Hallo')
 
-with W('ohoho.txt') as f:
-    f.write(9)
-print('End')
+# with W('ohoho.txt') as f:
+#     f.write(9)
+# print('End')
