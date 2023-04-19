@@ -69,6 +69,9 @@ def test_table_free_space(some_people):
 
     gl.assign(one_person, 2)
     assert (gl.free_space()) == {1: 2, 2: GuestList.max_at_table - 1}
+    gl.assign(Person("a", "b"), 1)
+    gl.assign(Person("c", "d"), 1)
+    gl.assign(Person("c", "d"), 1)
 
 
 def test_repr(some_people):

@@ -1,4 +1,4 @@
-import solution
+import a10_peter_jun as solution
 import pytest
 import string
 from io import StringIO

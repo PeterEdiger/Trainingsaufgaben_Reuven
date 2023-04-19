@@ -82,11 +82,17 @@ def test_table_free_space(some_people):
 
 def test_repr(some_people):
     gl = GuestList()
+    # zugewiesene_menschen = bis einschließlich item 10
     assigned_people = some_people[:GuestList.max_at_table]
+
     for one_person in assigned_people:
+        # Everybody gets assigned table 1?
         gl.assign(one_person, 1)
 
+    # Greift auf die __str__ method zu und speichert in output
     output = str(gl)
     assert output.startswith('1\n')
     for one_person in assigned_people:
+    # Wie kommt er auf one_person.last ?
+    # Sollte es nicht one_person.last_name heißen?
         assert f'{one_person.last}, {one_person.first}' in output

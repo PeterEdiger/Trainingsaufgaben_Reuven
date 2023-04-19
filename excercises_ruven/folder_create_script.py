@@ -23,7 +23,7 @@ def create_folder_name(task_name) -> (str, str):
 
 
 def create_dir_and_files():
-    new_folder_name, new_folder_n = create_folder_name("wedding_named_tuple")
+    new_folder_name, new_folder_n = create_folder_name("Tee")
     os.makedirs(new_folder_name)  # --> Creates a dir in cwd
     file_names = [
         "exercise_text", "peter_jun.py",
