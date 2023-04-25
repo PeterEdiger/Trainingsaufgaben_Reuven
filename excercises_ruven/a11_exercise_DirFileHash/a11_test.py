@@ -1,4 +1,4 @@
-from solution import DirFileHash
+from a11_peter_jun import DirFileHash
 from hashlib import md5
 import pytest
 import string
