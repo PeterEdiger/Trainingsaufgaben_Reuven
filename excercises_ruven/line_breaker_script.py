@@ -2,7 +2,7 @@
 
 line_len = 80
 
-my_input_file_path = "a11_exercise_DirFileHash/a11_exercise_text"
+my_input_file_path = "a12_exercise_virtual_property/a12_exercise_text"
 
 
 def line_breaker(input_file_path):

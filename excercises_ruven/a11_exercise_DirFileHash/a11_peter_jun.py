@@ -18,6 +18,7 @@ class DirFileHash:
         else:
             return None
 
+
 def hashing(dict_path, file_name):
     with open(dict_path + "/" + file_name) as f:
         data = f.read()
@@ -27,20 +28,10 @@ def hashing(dict_path, file_name):
         hexdigest = md5.hexdigest()
         return hexdigest
 
+
 if __name__ == "__main__":
-    d = DirFileHash("a11_test_directory")
+    f = len(open("a11_test_directory/a11_mini_file").read())
+    f1 = len(open("a11_test_directory/a11_mini_file", "rb").read())
 
-    print(d["ab.py"])
-
-
-"""
-Was muss passieren?
-Die Klasse muss files aus einem Ordner finden können. 
-
-Falls das gesuchte file vorhanden ist.
-Soll das hashvalue von diesem file returned
-
-
-print(d['passwd']) 
- 
-"""
+    print(f)
+    print(f1)
