@@ -1,0 +1,66 @@
+This week, we’re going to write a simple class that lets us pretend that things are equal, even when they are not.
+
+I want you to create a “ThresholdEqual” class. Each instance of this class will have a single attribute, “x”, which we will assume is always numeric. (You can check that it’s numeric at creation time if you want, but you don’t have to.)
+
+Normally, if we compare two numeric values with ==, the answer is cut and dried: Either they’re the same, or not.
+
+But with ThresholdEqual, they can be equal even if they’re not equal. That is, there will be a class attribute “threshold” that will determine the tolerance. If the tolerance is set to 2, then we should see the following:
+
+te1 = ThresholdEqual(10)
+te2 = ThresholdEqual(6)
+
+print(te1 == te2)        # prints "False"
+
+te1 = ThresholdEqual(10)
+te2 = ThresholdEqual(9)
+
+print(te1 == te2)        # prints "True"
+
+In other words, these two objects will be considered equal if their “x” attributes are within 2 of one another, and false otherwise.
+
+As it stands, this class is pretty useless, and is meant for teaching purposes. However, you should feel free to add functionality that will allow all of our favorite operators and methods to work on instances of ThresholdEqual, as well.
+
+If you want to go even further than that, then you can have init take an optional parameter indicating the tolerance for that particular instance, rather than for the entire class. However, you’ll then need to think about what happens if you compare two instances with different tolerances.
+
+Tests:
+
+from solution import ThresholdEqual
+
+def test_same():
+    te = ThresholdEqual(10)
+    assert te == te
+    assert te.threshold == 2
+
+def test_different_far():
+    te1 = ThresholdEqual(10)
+    te2 = ThresholdEqual(13)
+    assert te1 != te2
+    assert not(te1 == te2)
+
+def test_different_close():
+    te1 = ThresholdEqual(10)
+    te2 = ThresholdEqual(11)
+    assert te1 == te2
+
+def test_different_change_threshold():
+    te1 = ThresholdEqual(10)
+    te2 = ThresholdEqual(15)
+    assert te1 != te2
+
+    te1.threshold = 100
+    assert te1 == te2
+    assert te2 != te1
+
+    te2.threshold = 100
+    assert te1 == te2
+    assert te2 == te1
+
+def test_simple_int_stuff():
+    te = ThresholdEqual(10)
+
+    assert te + te == 20
+    assert te - te == 0
+    assert te * te == 100
+    assert te / te == 1
+    assert te % te == 0
+    assert te ** te == 10000000000

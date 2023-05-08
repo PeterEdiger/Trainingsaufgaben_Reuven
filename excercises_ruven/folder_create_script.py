@@ -5,7 +5,7 @@ import re
 This script creates a folder and file structure used in the exercises.
 """
 
-my_task_name = "no_git"
+my_task_name = "threshold_equal"
 
 def create_folder_name(task_name) -> (str, str):
     all_folders = os.listdir()  # list of dirs

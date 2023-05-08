@@ -1,4 +1,4 @@
-from a11_peter_jun import DirFileHash
+from a11_solution_reuven import DirFileHash
 from hashlib import md5
 import pytest
 import string
@@ -7,6 +7,9 @@ import os
 
 @pytest.fixture
 def dir_with_files(tmp_path):
+    """
+    dir with files gets simulated ?
+    """
     d = tmp_path
 
     with open(d / 'ascii_lowercase', 'w') as f:
@@ -39,3 +42,5 @@ def test_all_in_dir(dir_with_files):
         content = getattr(string, one_filename).encode()
         m.update(content)
         assert dfh[one_filename] == m.hexdigest()
+
+# PosixPath

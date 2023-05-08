@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from solution import RandMemory
+from a12_peter_jun import RandMemory
+
 
 def test_empty():
     r = RandMemory(1, 100)
@@ -9,13 +10,15 @@ def test_empty():
     assert r._history == []
     assert r.history() == []
 
+
 def test_types():
     r = RandMemory(1, 100)
     assert type(r.get) == int
 
+
 def test_three():
     r = RandMemory(1, 100)
-    old_numbers = [ ]
+    old_numbers = []
     for i in range(3):
         old_numbers.append(r.get)
     assert r.history() == old_numbers

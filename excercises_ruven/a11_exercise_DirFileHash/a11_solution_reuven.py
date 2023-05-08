@@ -7,8 +7,8 @@ class DirFileHash(object):
         self.dirname = dirname
 
     def __getitem__(self, filename):
-        # os.path.join() concatenates the args with added
-        # / <dirname/filename>
+        # os.path.join() concatenates the args with added "/"
+        #  <dirname/filename>
         fullname = os.path.join(self.dirname, filename)
         if os.path.exists(fullname) and os.path.isfile(fullname):
             m = hashlib.md5()
