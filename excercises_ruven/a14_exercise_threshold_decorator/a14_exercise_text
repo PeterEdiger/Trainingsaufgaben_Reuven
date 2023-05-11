@@ -1,0 +1,108 @@
+Last week, we implemented the ThresholdEqual class, which allowed us to explore the idea of two objects being roughly equal.
+
+This sort of functionality might be useful in a more general sense. One way that we could include this functionality in a variety of classes would be via inheritance – either a straight hierarchy, or via a “mixin” class from which we inherit along with (and before) other parent classes.
+
+There is another way, though: Decorators! A decorator allows you to rewrite a Python function or class, both when it’s defined and when it’s run.
+
+This week, I would like for you to write a class decorator called “threshold_equal”. It’ll take two arguments, a string (“attribute”) indicating which attribute should be compared, and an integer (“threshold”) indicating how close the two objects could be in order to be equal. For example, let’s assume that I have a Person class:
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+p1 = Person('a', 20)
+p2 = Person('b', 20.2)
+p3 = Person('c', 30)
+
+print(p1 == p2)
+print(p1 == p3)
+
+We could expect, when running this code, to get “False” twice. That’s normally the case with our own classes; if we don’t define “eq”, then Python will assume that we don’t want any two instances to be considered equal to one another.
+
+But if we apply our “threshold_equal” decorator, it’s a different story altogether:
+
+@threshold_equal('age', 1)
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+p1 = Person('a', 20)
+p2 = Person('b', 20.2)
+p3 = Person('c', 30)
+
+print(p1 == p2)
+print(p1 == p3)
+
+Now we would expect to see “True” twice. That’s because our decorator made sure that instances of our class would be compared with “age”, and that they would be considered equal if the age difference was within 1.
+
+I’ll admit that this week’s exercise might be challenging. That’s because decorators pull together just about every interesting and complex part of Python:
+
+- First-class functions
+- Closures (i.e., inner functions)
+- Classes as objects
+- Attributes
+
+Tests:
+
+from solution import threshold_equal
+
+
+def test_self():
+    @threshold_equal('x', 0)
+    class MyClass:
+        def __init__(self, x):
+            self.x = x
+
+    m1 = MyClass(10)
+    assert m1 == m1
+
+
+def test_two_equal():
+    @threshold_equal('x', 0)
+    class MyClass:
+        def __init__(self, x):
+            self.x = x
+
+    m1 = MyClass(10)
+    m2 = MyClass(10)
+    assert m1 == m2
+
+
+def test_two_close():
+    @threshold_equal('x', 2)
+    class MyClass:
+        def __init__(self, x):
+            self.x = x
+
+    m1 = MyClass(10)
+    m2 = MyClass(12)
+    assert m1 == m2
+    assert m2 == m1
+
+
+def test_two_unequal():
+    @threshold_equal('x', 2)
+    class MyClass:
+        def __init__(self, x):
+            self.x = x
+
+    m1 = MyClass(10)
+    m2 = MyClass(20)
+    assert m1 != m2
+
+
+def test_wrong_type():
+    @threshold_equal('x', 2)
+    class MyClass:
+        def __init__(self, x):
+            self.x = x
+
+    m1 = MyClass(10)
+    assert m1 != False
+    assert m1 != 5
+    assert m1 != 'abcd'
+    assert False != m1
+    assert 5 != m1
+    assert 'abcd' != m1
