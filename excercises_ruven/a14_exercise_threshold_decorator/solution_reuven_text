@@ -1,0 +1,115 @@
+This week was a tough one, I know! But I hope that it gave you an appreciation for the sorts of things that we can do with decorators.
+
+First of all, writing a decorator is usually done with a nested function. The outer function is the decorator; it’s what we call with the @ symbol, and which is executed at definition time. But it’s the inner function, which is returned to its caller, which does most of the heavy lifting; it is invoked in place of the original function. Any arguments that would have been passed to the original function are passed to this inner function, which can then pass them along – in part or in full – to the original function.
+
+A simple decorator that does nothing but announce its presence would thus look like:
+
+def mydeco(f):
+    print('Now running mydeco')
+
+    def wrapper(*args, **kwargs):
+        print('Now running wrapper')
+        value = f(*args, **kwargs)
+        print(f'Got result {value} back from {f.__name__}')
+        return value
+    return wrapper
+
+Given the above, we can then decorate a simple function and use it:
+
+@mydeco
+def add(a, b):
+    return a + b
+
+print(add(10, 3))
+print(add(20, 5))
+
+Here’s what we see printed:
+
+Now running mydeco
+Now running wrapper
+Got result 13 back from add
+13
+Now running wrapper
+Got result 25 back from add
+25
+
+Notice that the external function (“mydeco”) is invoked only once, just after we define “add”. The inner function, “wrapper”, is invoked once per time we call “add”. That’s because “add” has been replaced by “wrapper”.
+
+Things get a bit more complex when we want to have a decorator that takes an argument. In such a case, we need to have a three-part decorator – that is, a function in a function in a function. Let’s say that we want our decorator to take two arguments, “attribute” and “threshold”. How would that look?
+
+def mydeco(attribute, threshold):
+    print(f'Running mydeco with {attribute=} and {threshold=}')
+
+    def wrapper(f):
+        print(f'In wrapper with function {f.__name__}')
+
+        def inner(*args, **kwargs):
+            print('Now running inner)
+            value = f(*args, **kwargs)
+            print(f'Got result {value} back from {f.__name__}')
+            return value
+        return inner
+    return wrapper
+
+Notice that we’ve broken our outer function, “mydeco”, into two functions: The outer “mydeco” takes the decorator arguments, while the “wrapper” function takes the function itself. When we run things, they look like this:
+
+@mydeco('a', 2)
+def add(a, b):
+    return a + b
+
+print(add(10, 3))
+print(add(20, 5))
+
+We get the following output:
+
+Running mydeco with attribute='a' and threshold=2
+In wrapper with function add
+Now running inner
+Got result 13 back from add
+13
+Now running inner
+Got result 25 back from add
+25
+
+1
+
+Notice, by the way, the sneaky way that I’m using {varname=} in my f-string. This is a feature of Python 3.8, and inserts “name={name}” into the f-string. It’s fantastic for debugging.
+
+All of this is interesting, but seemingly irrelevant. After all, this week’s exercise was about writing a decorator for a class not a function. Yes, but remember that decorators can affect any callable, which is basically the same as saying “functions and classes”. So, how many functions will we need? Where are we going to get the class passed to us? And what are we going to return?
+
+Here’s the strategy:
+
+    The outer function, “threshold_equal”, will take two arguments (attribute and threshold). This function will be invoked so that we can pass arguments to our decorator.
+
+    The “wrapper” function will get the class (c) as an argument. Since we only want to modify the class a single time, we do it here, defining a new eq method and assigning it to the class. Because we’re getting the attribute name from the “attribute” variable, we’ll need to use “getattr” rather than the traditional dot-access syntax.
+
+    We no longer need an “inner” function. Rather than returning a function, we’ll just return “c”, the class – a callable – which we have modified.
+
+The result looks like this:
+
+def threshold_equal(attribute, threshold):
+    def wrapper(c):
+        def tolerant_eq(self, other):
+            if not hasattr(other, attribute):
+                return False
+
+            if abs(getattr(self, attribute) - getattr(other, attribute)) <= threshold:
+                return True
+            else:
+                return False
+
+        c.__eq__ = tolerant_eq
+
+        return c
+
+    return wrapper
+
+In the end, the decorator didn’t take a lot of code to create. But it does mean that we can add our version of “eq” to any class that we want, checking any single attribute.
+
+(I actually thought about asking you to compare numerous attributes with numerous different thresholds, but decided that doing so would be inexcusably cruel, even for me.)
+
+Just as with our three-function decorator, here we have three levels of callables. The only differences are that (a) the callable is a class, (b) we return the class, rather than a function, from the “wrapper” function, and (c) we use the “wrapper” function to add a new, custom method onto the class. In addition, you can see that we defined an inner function in “wrapper” for the sole purpose of assigning it to our class. In theory, such a function could be defined elsewhere, but I like to have it here, close by.
+
+And there you have it! We’ve successfully written a decorator that modifies classes, and which lets us customize their behavior without using inheritance.
+
+Reuven

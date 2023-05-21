@@ -1,0 +1,40 @@
+This week, our final week of this WPE cohort, we’ll work with threading. 
+
+The idea is fairly simple: Given a list of URLs, I’d like to measure how long it 
+takes to receive a response from each one. But of course, we can’t really rely 
+on a single request for such a timing test. For that reason, we’ll make a number 
+of requests to each URL, looking at the average time over a number of requests. 
+
+We aren’t going to make the HTTP requests one at a time, but rather in threads. 
+In this way, we can take advantage of the fact that the network is always going 
+to be slower than our own computer, and that we can take advantage of such 
+latency to make a number of concurrent requests. 
+
+(It goes without saying that the point here is to get more familiar working with 
+Python threads, not to actually create a serious benchmarking and monitoring 
+system.) 
+
+I’d thus like you to write a function called “speed_test”, which will accept the 
+following arguments: 
+
+*args, any number of URLs (strings) that should be tested 
+number_of_checks, a parameter that is keyword only, with a default value of 10 
+
+When invoked, speed_test will spawn a new thread for each of the checks it runs. 
+(So if it checks 3 URLs with number_of_checks=4, it’ll spawn a total of 12 
+threads.) Each thread will measure the time it takes to receive a response from 
+the URL, and will put a 2-element tuple (with the URL and the elapsed time) on 
+the queue. speed_test will then collect data from the queue, returning a dict in 
+which the keys are URLs and the values are lists of elapsed times. (So if you 
+checked 3 URLs, each 4 times, then you’ll have a dict with 3 key-value pairs, 
+and 4 elements in each of the value lists.) 
+
+It should be possible to then get the dict back from “speed_test” iterating over 
+the keys and values and printing how much time, on average, each URL took to 
+retrieve. 
+
+There are no tests for this week’s exercise. If you aren’t familiar with 
+threading or queues in Python, you might want to look at the documentation at 
+threading — Thread-based parallelism — Python 3.11.3 documentation, as well as 
+queue — A synchronized queue class — Python 3.11.3 documentation, which 
+describes the “queue.Queue” class. 

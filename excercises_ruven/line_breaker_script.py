@@ -2,7 +2,7 @@
 
 line_len = 80
 
-my_input_file_path = "a14_exercise_threshold_decorator/a14_exercise_text"
+my_input_file_path = "a15_exercise_speed_test/a15_exercise_text"
 
 
 def line_breaker(input_file_path):
